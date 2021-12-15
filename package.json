@@ -1,6 +1,11 @@
 {
-  "name": "my-deps",
-  "main": "dist/index.js",
+  "name": "get-filename",
+  "exports": {
+    "getFilename": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index-common.cjs"
+    }
+  },
   "engines": {
     "node": ">=14"
   },
@@ -16,8 +21,8 @@
     "prepush": "npm run test",
     "postinstall": "husky install",
     "postpublish": "pinst --enable",
-    "pub": "npx swc ./src/index.ts -o ./dist/index.js -C minify=true && npx swc ./src/index.ts -o ./dist/index.common.js -C module.type=commonjs,minify",
-    "prepublishOnly": "pinst --disable",
+    "pub": "npx swc ./src/index.ts -o ./dist/index.mjs -C minify=true && npx swc ./src/index.ts -o ./dist/index-common.cjs -C module.type=commonjs,minify && tsc ./src/index.ts --outFile ./dist/index.d.ts --declaration --emitDeclarationOnly --esModuleInterop && tsc ./src/index.ts --outFile ./dist/index-common.d.ts --declaration --emitDeclarationOnly --esModuleInterop --module commonjs",
+    "prepublishOnly": "pinst --disable && yarn pub",
     "test": "jest --coverage",
     "test:dev": "jest -w",
     "test:build": "jest dist",

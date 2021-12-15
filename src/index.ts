@@ -9,6 +9,6 @@ function getFilename(first: string): string {
 }
 
 function isW32(): boolean {
-  return process.platform === 'win32';
+  return process.platform === "win32";
 }
-export { getFilename }
+export { getFilename };
