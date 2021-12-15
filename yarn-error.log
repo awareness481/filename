@@ -1,5 +1,5 @@
 Arguments: 
-  /home/p/.nvm/versions/node/v14.18.1/bin/node /home/p/.nvm/versions/node/v14.18.1/bin/yarn publish
+  /home/p/.nvm/versions/node/v14.18.1/bin/node /home/p/.nvm/versions/node/v14.18.1/bin/yarn publish --access=public
 
 PATH: 
   /home/p/.fly/bin:/home/p/.nvm/versions/node/v14.18.1/bin:/home/p/.npm-global/bin:/home/p/.cargo/bin:/home/p/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/p/Android/Sdk/emulator:/home/p/Android/Sdk/tools:/home/p/Android/Sdk/tools/bin:/home/p/Android/Sdk/platform-tools
@@ -14,22 +14,28 @@ Platform:
   linux x64
 
 Trace: 
-  Error: canceled
-      at Interface.<anonymous> (/home/p/.nvm/versions/node/v14.18.1/lib/node_modules/yarn/lib/cli.js:137143:13)
-      at Interface.emit (events.js:400:28)
-      at Interface._ttyWrite (readline.js:1001:16)
-      at ReadStream.onkeypress (readline.js:265:10)
-      at ReadStream.emit (events.js:400:28)
-      at emitKeys (internal/readline/utils.js:358:14)
-      at emitKeys.next (<anonymous>)
-      at ReadStream.onData (readline.js:1270:36)
-      at ReadStream.emit (events.js:400:28)
-      at addChunk (internal/streams/readable.js:293:12)
+  Error: https://registry.npmjs.org/-/user/org.couchdb.user:awareness481: failed to authenticate: Could not authenticate awareness481: bad password
+      at Request.params.callback [as _callback] (/home/p/.nvm/versions/node/v14.18.1/lib/node_modules/yarn/lib/cli.js:67029:18)
+      at Request.self.callback (/home/p/.nvm/versions/node/v14.18.1/lib/node_modules/yarn/lib/cli.js:140883:22)
+      at Request.emit (events.js:400:28)
+      at Request.<anonymous> (/home/p/.nvm/versions/node/v14.18.1/lib/node_modules/yarn/lib/cli.js:141855:10)
+      at Request.emit (events.js:400:28)
+      at IncomingMessage.<anonymous> (/home/p/.nvm/versions/node/v14.18.1/lib/node_modules/yarn/lib/cli.js:141777:12)
+      at Object.onceWrapper (events.js:519:28)
+      at IncomingMessage.emit (events.js:412:35)
+      at endReadableNT (internal/streams/readable.js:1334:12)
+      at processTicksAndRejections (internal/process/task_queues.js:82:21)
 
 npm manifest: 
   {
-    "name": "my-deps",
-    "main": "dist/index.js",
+    "name": "@awareness481/get-filename",
+    "exports": {
+      ".": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index-common.cjs"
+      }
+    },
+    "types": "./dist/index.d.ts",
     "engines": {
       "node": ">=14"
     },
@@ -45,8 +51,8 @@ npm manifest:
       "prepush": "npm run test",
       "postinstall": "husky install",
       "postpublish": "pinst --enable",
-      "publish": "npx swc ./src/index.ts -o ./dist/index.cjs.js -C module.type=cjs && npx swc ./src/index.ts -o i./dist/index.esm.js -C module.type=esm && npx swc ./src/index.ts -o /dist/index.umd.js -C module.type=umd && npx swc ./src/index.ts -o /dist/index.cjs.js -C module.type=cjs",
-      "prepublishOnly": "pinst --disable",
+      "pub": "npx swc ./src/index.ts -o ./dist/index.mjs -C minify=true && npx swc ./src/index.ts -o ./dist/index-common.cjs -C module.type=commonjs,minify && tsc ./src/index.ts --outFile ./dist/index.d.ts --declaration --emitDeclarationOnly --esModuleInterop --target es2020 --moduleResolution node",
+      "prepublishOnly": "pinst --disable && yarn pub",
       "test": "jest --coverage",
       "test:dev": "jest -w",
       "test:build": "jest dist",
@@ -73,7 +79,7 @@ npm manifest:
       "ts-node-dev": "^1.1.6",
       "typescript": "^4.2.4"
     },
-    "version": "0.0.0"
+    "version": "0.3.1"
   }
 
 yarn manifest: 
