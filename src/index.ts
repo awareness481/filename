@@ -1,14 +1,14 @@
-import path from "path";
-
-function getFilename(first: string): string {
-  if (isW32()) {
-    return path.win32.basename(first, path.extname(first));
+const loadModule = async (modulePath: string) => {
+  try {
+    return await import(modulePath);
+  } catch (e) {
+    return await import("./path.js");
   }
+};
+let { default: path } = await loadModule("path");
 
-  return path.basename(first, path.extname(first));
+function getFilename(filename: string): string {
+  return path.basename(filename, path.extname(filename));
 }
 
-function isW32(): boolean {
-  return process.platform === "win32";
-}
 export { getFilename };

@@ -2,7 +2,7 @@
   "name": "@awareness481/get-filename",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index-common.cjs"
     }
   },
@@ -22,7 +22,7 @@
     "prepush": "npm run test",
     "postinstall": "husky install",
     "postpublish": "pinst --enable",
-    "pub": "npx swc ./src/index.ts -o ./dist/index.js -C minify=true && npx swc ./src/index.ts -o ./dist/index-common.cjs -C module.type=commonjs,minify && tsc",
+    "pub": "npx swc ./src/index.ts -o ./dist/index.mjs -C minify=true && npx swc ./src/index.ts -o ./dist/index-common.cjs -C module.type=commonjs,minify && tsc --module esnext && npx swc ./src/path.js -o ./dist/path.js -C minify=true",
     "prepublishOnly": "pinst --disable && yarn pub",
     "test": "jest --coverage",
     "test:dev": "jest -w",

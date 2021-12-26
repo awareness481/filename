@@ -1,0 +1,29 @@
+{
+    "jsc": {
+      "parser": {
+        "syntax": "typescript",
+        "tsx": false,
+        "dynamicImport":true,
+        "privateMethod": false,
+        "functionBind": false,
+        "exportDefaultFrom": false,
+        "exportNamespaceFrom": false,
+        "decorators": false,
+        "decoratorsBeforeExport": false,
+        "topLevelAwait": true,
+        "importMeta": false,
+        "module": {
+            "type": "es6",
+            "strict": false,
+            "strictMode": true,
+            "lazy": false,
+            "noInterop": false
+        }
+      },
+      "transform": null,
+      "target": "es2020",
+      "loose": false,
+      "externalHelpers": false,
+      "keepClassNames": false
+    }
+}
