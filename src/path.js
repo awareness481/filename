@@ -21,8 +21,10 @@
 
 "use strict";
 
-const StringPrototypeCharCodeAt = (that,...args)=>String.prototype.charCodeAt.apply(that,args);
-const StringPrototypeSlice = (that,...args)=>String.prototype.slice.apply(that,args);
+const StringPrototypeCharCodeAt = (that, ...args) =>
+  String.prototype.charCodeAt.apply(that, args);
+const StringPrototypeSlice = (that, ...args) =>
+  String.prototype.slice.apply(that, args);
 
 const CHAR_UPPERCASE_A = 65;
 const CHAR_LOWERCASE_A = 97;
